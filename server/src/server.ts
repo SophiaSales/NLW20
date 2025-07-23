@@ -1,5 +1,4 @@
 import { fastify} from "fastify";
-import { sql } from "./db/connection";
 import {
     serializerCompiler,
     validatorCompiler,
@@ -7,6 +6,7 @@ import {
 } from "fastify-type-provider-zod";
 import {fastifyCors} from "@fastify/cors";
 import { env } from "./env";
+import { getRoomsRoute } from "./http/routes/get-rooms";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -20,5 +20,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.get('/health', () => {
     return 'OK'
 })
+
+app.register(getRoomsRoute)
 
 app.listen({port: env.PORT})
