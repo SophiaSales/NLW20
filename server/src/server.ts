@@ -1,4 +1,5 @@
 import { fastify} from "fastify";
+import { sql } from "./db/connection";
 import {
     serializerCompiler,
     validatorCompiler,
@@ -20,6 +21,4 @@ app.get('/health', () => {
     return 'OK'
 })
 
-app.listen({port: env.PORT}).then(() => {    
-    console.log('HTTP server running')
-})
+app.listen({port: env.PORT})
